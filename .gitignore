@@ -1,0 +1,7 @@
+.venv/
+Tesseract-OCR/
+uploads/*.txt
+uploads/*.mp4
+uploads/extracted/*
+uploads/images/*
+*.mp4
