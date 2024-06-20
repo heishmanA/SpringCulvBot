@@ -205,9 +205,9 @@ def process_igns(list_of_igns: list[str]):
         else:  # Put IGNS that couldn't be matched into a list for debugging/manual solving
             error_results.append(guild_info[x])
 
-    write_to_file(correct_results, "results.csv", True)
-    write_to_file(error_results, "errors.csv")
-    write_to_file(duplicate_results, "dupes.csv")
+    write_to_file(correct_results, "results.csv", clean=True)
+    write_to_file(error_results, "errors.txt")
+    write_to_file(duplicate_results, "dupes.txt")
 
 
 @app.route("/", methods=["POST"])
@@ -233,7 +233,7 @@ def upload_image() -> str: # not sure if this function name needs to stay as upl
     return render_template("done.html")
 
 
-def write_to_file(output: list, filename: str, delim=",", clean=False):
+def write_to_file(output: list, filename: str, clean=False):
     """Writes the individual lists of character culv info into csv format
     Args:
         v (list): The list containing all the lists of files
@@ -241,8 +241,8 @@ def write_to_file(output: list, filename: str, delim=",", clean=False):
         delim (str): the delimeter for writing ',' by default
     """
     with open(filename, "w", encoding="utf-8") as f:
-        writer = csv.writer(f)
         if clean is True:
+            writer = csv.writer(f)
             for row in output:
                 cleaned_output = [
                     cell.replace("..", " ")
@@ -254,7 +254,8 @@ def write_to_file(output: list, filename: str, delim=",", clean=False):
                 ]
                 writer.writerow(cleaned_output)
         else:
-            writer.writerows(output)
+            for row in output:
+                f.write(f"{row}\n")
 
 
 @app.route("/", methods=["GET"])
