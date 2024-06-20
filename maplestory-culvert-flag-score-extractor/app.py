@@ -2,15 +2,10 @@ from flask import Flask, render_template, request, redirect
 import os
 import cv2
 import numpy as np
-import PIL
-from PIL import Image
 from pytesseract import pytesseract
 import glob
-from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 from werkzeug.utils import secure_filename
-from skimage.morphology import skeletonize
-from skimage.util.dtype import img_as_ubyte
 import csv
 
 
