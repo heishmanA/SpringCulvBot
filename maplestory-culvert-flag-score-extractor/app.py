@@ -15,7 +15,7 @@ upload_folder = "uploads/"
 app.config['UPLOAD_FOLDER'] = upload_folder
 IMG_PATH = 'uploads/images'
 SS_PATH = 'uploads/images/ss'
-PROCESSED_PATH = f"uploads/extracted/"
+PROCESSED_PATH = "uploads/extracted/"
 IMG_PATHS = [IMG_PATH, PROCESSED_PATH]
 
 
@@ -57,13 +57,13 @@ def upload_image():
     # create starting frame
     result = cv2.imwrite('uploads/images/ss0.png',frame_prev)
     if result is False:
-        raise ImageSaveError(f"Error while saving initial image.")
+        raise ImageSaveError("Error while saving initial image.")
     i=1
     
     # creates the individual images 
     while(cap.isOpened()):
         ret, frame_cur = cap.read()
-        if ret == False:
+        if ret is False:
             break
         diff = cv2.absdiff(frame_prev,frame_cur)
         mean_diff = np.mean(diff)
